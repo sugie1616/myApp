@@ -234,58 +234,6 @@ Ext.onReady(function() {
 			}]
 	});
 
-	//	var formPanel = Ext.widget('form',{
-	//		title: 'Form',
-	//		frame: true,
-	//		width: 300,
-	//		bodyStyle:{
-	//			padding:'8px'
-	//		},
-	//		items:[
-	//		{
-	//			xtype: 'textfield',
-	//			name: 'user ID',
-	//			fieldLabel: 'user ID',
-	//		},
-	//		{
-	//			xtype: 'textfield',
-	//			name: 'password',
-	//			inputType: 'password',
-	//			fieldLabel: 'password'
-	//		},
-	//		],
-	//		buttonAlign:'left',
-	//		buttons:[
-	//			{
-	//				text:'register',
-	//				handler:function(){
-	//					var formFields = this.up('form').getForm();
-	//					var formValues = formFields.getValues();
-	//					var data = [];
-	//					new Ext.iterate(formValues,function(key, val, arr){
-	//						data.push({
-	//							fieldname:key,
-	//							formvalue:val
-	//						});
-	//					});
-	//	
-	//					var tpl = new Ext.XTemplate(
-	//							'<tpl for=".">',
-	//							'<p>{fieldname}:{formvalue}</p>',
-	//							'</tpl>'
-	//					);
-	//	
-	//					new Ext.Msg.show()({
-	//						title: 'confirmation',
-	//						msg:tpl.apply(data),
-	//						width:300,
-	//						buttons:Ext.Msg.OK
-	//					});
-	//				}
-	//			}
-	//		]
-	//	});
-	//north panel
 	var northPanel = Ext.create('Ext.panel.Panel', {
 		frame: true,
 		split: true,
@@ -294,6 +242,7 @@ Ext.onReady(function() {
 		margins: '0 0 0 5',
 		title: 'north',
 		region:'north',
+		html: 'Welcome !',
 		items: [
 		],
 	});
