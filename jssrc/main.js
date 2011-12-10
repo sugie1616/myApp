@@ -191,12 +191,14 @@ var formPanel = Ext.widget('form', {
 			handler: function() {
 				Ext.Ajax.request({
 					method: 'GET',
-				url: '../cgi-bin/index.cgi',
-				params: formPanel.getForm(),
-				success: function() {
-				},
-				failure: function() {
-				},
+					url: 'http://localhost/cgi-bin/login.k',
+					params: formPanel.getForm(),
+					success: function() {
+						Ext.Msg.alert('Login Completed');
+					},
+					failure: function() {
+						Ext.Msg.alert('Login Failed');
+					},
 				});
 			}
 		},
@@ -223,6 +225,7 @@ var editorPanel = Ext.widget('form', {
 		{
 			xtype: 'textareafield',
 			name: 'textarea',
+			id: 'textarea',
 			height: 200,
 			width: 800,
 			emptyText: 'Source Code',
@@ -233,16 +236,53 @@ var editorPanel = Ext.widget('form', {
 			text: 'run',
 			handler: function() {
 				Ext.Ajax.request({
+					method: 'POST',
+					url: 'http://localhost/cgi-bin/run.k',
+					params: {
+						input: document.getElementById("textarea").getElementsByTagName("textarea")[0].value
+					},
+					success: function(result) {
+						//Ext.Msg.alert('Success Run Konoha');
+						document.getElementById("console").getElementsByTagName("textarea")[0].value = result.responseText;
+					},
+					failure: function() {
+						Ext.Msg.alert('Fail Run Konoha');
+					},
+				});
+			}
+		},	
+		{
+			xtype: 'button',
+			name: 'savebtn',
+			text: 'save',
+			handler: function() {
+				Ext.Ajax.request({
 					method: 'GET',
 					url: 'http://localhost/cgi-bin/run.k',
 					params: 'print "Hello World"',
 					success: function() {
-						Ext.Msg.alert('Success Run Konoha');
-						editorPanel.console.value = "";
-						editorPanel.console.value += "aaaaaa";
+						Ext.Msg.alert('Saving Completed');
 					},
 					failure: function() {
-						Ext.Msg.alert('Fail Run Konoha');
+						Ext.Msg.alert('Saving Failed');
+					},
+				});
+			}
+		},
+		{
+			xtype: 'button',
+			name: 'loadbtn',
+			text: 'load',
+			handler: function() {
+				Ext.Ajax.request({
+					method: 'GET',
+					url: 'http://localhost/cgi-bin/run.k',
+					params: 'print "Hello World"',
+					success: function() {
+						Ext.Msg.alert('Loading Completed');
+					},
+					failure: function() {
+						Ext.Msg.alert('Saving Failed');
 					},
 				});
 			}
@@ -256,6 +296,7 @@ var editorPanel = Ext.widget('form', {
 		{
 			xtype: 'textareafield',
 			name: 'console',
+			id: 'console',
 			width: 800,
 			emptyText: 'Console',
 		},

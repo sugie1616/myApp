@@ -1,16 +1,11 @@
 #!/usr/local/bin/konoha
 
-//using konoha.sql.*;
 OUT << "Content-Type: text/plain" << EOL << EOL;
 
 String query = $env.QUERY_STRING;
 String[] args = query.split("&");
 /*
- 
- TODO
- 1. register user data by konoha.sql
- 
- 2. create user's repository by git (gitosis)
- 
- 
+TODO
+ confirm user data by konoha.sql
 */
+

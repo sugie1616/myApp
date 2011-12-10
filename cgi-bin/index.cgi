@@ -15,9 +15,15 @@ out.flush();
 
 /* POST */
 
-int length = (to int)$env.CONTENT_LENGTH;
-Bytes b = new byte[length];
+//int length = (to int)$env.CONTENT_LENGTH;
+//Bytes b = new byte[length];
 
 // IN.read(b, 0, length); // not exist
 // InputStream input = (to InputStream)b;
 // input.readLine();
+
+s = IN.readLine()
+while (s != null) {
+	...
+	s = IN.readLine();
+}
