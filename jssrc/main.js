@@ -186,7 +186,7 @@ var formPanel = Ext.widget('form', {
 			formBind: true,
 			disabled: true,
 			id: 'loginButton',
-			text: 'login',
+			text: 'Login',
 			width: 80,
 			handler: function() {
 				Ext.Ajax.request({
@@ -204,7 +204,8 @@ var formPanel = Ext.widget('form', {
 		},
 		]
 	}]
-});	
+});
+
 var editorPanel = Ext.widget('form', {
 	title: 'Editor',
 	frame: true,
@@ -233,7 +234,7 @@ var editorPanel = Ext.widget('form', {
 		{
 			xtype: 'button',
 			name: 'runbtn',
-			text: 'run',
+			text: 'Run',
 			handler: function() {
 				Ext.Ajax.request({
 					method: 'POST',
@@ -254,11 +255,11 @@ var editorPanel = Ext.widget('form', {
 		{
 			xtype: 'button',
 			name: 'savebtn',
-			text: 'save',
+			text: 'Save',
 			handler: function() {
 				Ext.Ajax.request({
 					method: 'GET',
-					url: 'http://localhost/cgi-bin/run.k',
+					url: 'http://localhost/cgi-bin/src.k',
 					params: 'print "Hello World"',
 					success: function() {
 						Ext.Msg.alert('Saving Completed');
@@ -272,11 +273,11 @@ var editorPanel = Ext.widget('form', {
 		{
 			xtype: 'button',
 			name: 'loadbtn',
-			text: 'load',
+			text: 'Load',
 			handler: function() {
 				Ext.Ajax.request({
 					method: 'GET',
-					url: 'http://localhost/cgi-bin/run.k',
+					url: 'http://localhost/cgi-bin/src.k',
 					params: 'print "Hello World"',
 					success: function() {
 						Ext.Msg.alert('Loading Completed');
@@ -303,6 +304,40 @@ var editorPanel = Ext.widget('form', {
 	]
 });
 
+var findPanel = Ext.create('Ext.form.Panel', {
+	title: 'find your friends',
+	frame: true,
+	split: 'true',
+	margins: '5 0 0 5',
+	items: [
+		{
+			xtype: 'displayfield',
+			value: 'Friends Name:',
+		},
+		{
+			xtype: 'textfield',
+			emptyText: 'Friends Name',
+		},
+		{
+			xtype: 'button',
+			text: 'Search',
+			handler: function() {
+				Ext.Ajax.request({
+					method: 'GET',
+					url: 'http://localhost/cgi-bin/usr.k',
+					params: formPanel.getForm(),
+					success: function() {
+						Ext.Msg.alert('Search Completed');
+					},
+					failure: function() {
+						Ext.Msg.alert('Search Failed');
+					},
+				});
+			}
+		//store: store
+		},
+	],
+});
 
 var northPanel = Ext.create('Ext.panel.Panel', {
 	frame: true,
@@ -316,6 +351,7 @@ var northPanel = Ext.create('Ext.panel.Panel', {
 	items: [
 	],
 });
+
 //center panel
 var centerPanel = Ext.create('Ext.panel.Panel', {
 	frame: true,
@@ -326,20 +362,21 @@ var centerPanel = Ext.create('Ext.panel.Panel', {
 	title: 'center',
 	region:'center',
 	items:[
-		new Ext.Panel({
-			title: 'Your-info',
-		region: 'north',
-		stateId: 'me-panel',
-		frame: true,
-		split: true,
-		animCollapse: true,
-		margins: '0 0 0 5',
-		html: 'Hello World',
-		items: []
-		}),
+	new Ext.Panel({
+		title: 'Your-info',
+	region: 'north',
+	stateId: 'me-panel',
+	frame: true,
+	split: true,
+	animCollapse: true,
+	margins: '0 0 0 5',
+	html: 'Hello World',
+	items: []
+	}),
 		editorPanel,
-	]
+		]
 });
+
 //west panel
 var westPanel = Ext.create('Ext.panel.Panel', {
 	title: 'West',
@@ -355,16 +392,21 @@ var westPanel = Ext.create('Ext.panel.Panel', {
 	formPanel,
 	]
 });
+
 //east panel
 var eastPanel = Ext.create('Ext.panel.Panel',{
 	title: 'Friends',
-	width: 300,
+	width: 210,
+	maxWidth: 400,
 	region: 'east',
 	frame: true,
 	split: true,
 	collapsible: true,
 	animCollapse: true,
 	margins: '0 0 0 5',
+	items:[
+		findPanel,
+	],
 });
 new Ext.Viewport({
 	layout: 'border',
